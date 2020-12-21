@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Needded to deal with windows main function linking
+#define SDL_MAIN_HANDLED
+
 #include "SDL.h"
 
 /*
@@ -10,8 +13,11 @@ Compile with:
 
 void printSDLVersion();
 
-int main(int argc, char* args[])
+int main(int argc, char* argv[])
 {
+	// Needded to deal with windows main function linking.
+	SDL_SetMainReady();
+
 	// SDL initialization
 	if (SDL_Init(SDL_INIT_VIDEO))
 	{
