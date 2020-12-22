@@ -7,6 +7,7 @@ project(sdl2-generated-font VERSION 1.0
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${sdl2-generated-font_SOURCE_DIR}/cmake-scripts")
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED True)
+set(CMAKE_BUILD_TYPE Debug)
 
 find_package(SDL2 REQUIRED)
 
@@ -21,5 +22,5 @@ target_link_libraries(hello PRIVATE ${SDL2_LIBRARY})
 if(MSVC)
 	add_compile_options(/W3 /WX)
 else()
-	add_compile_options(-W -Wall -g -Werror -pedantic)
+	add_compile_options(-W -Wall -Werror -pedantic)
 endif()
