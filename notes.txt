@@ -1,1 +1,5 @@
-https://trenki2.github.io/blog/2017/06/02/using-sdl2-with-cmake/
+Origin of FindSDL2.cmake
+    https://trenki2.github.io/blog/2017/06/02/using-sdl2-with-cmake/
+
+In case of manual linux compile:
+	gcc -o hello main.c -I/usr/include/SDL2 `sdl2-config --cflags --libs`

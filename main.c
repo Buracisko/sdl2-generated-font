@@ -8,6 +8,9 @@
 
 int main(int argc, char* argv[])
 {
+	// Args will be used in the future
+	for (int i = 0; i < argc; ++i)
+		printf("arg[%d]: %s\n", i, argv[i]);
 	// Needded to deal with windows main function linking.
 	SDL_SetMainReady();
 

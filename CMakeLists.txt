@@ -18,9 +18,9 @@ add_executable(testFont main.c)
 
 target_link_libraries(testFont PRIVATE ${SDL2_LIBRARY})
 
-#Not sure how clean it is, but I want this flags
-if(MSVC)
-	add_compile_options(/W3 /WX)
-else()
-	add_compile_options(-W -Wall -Werror -pedantic)
+if (CMAKE_COMPILER_IS_GNUCC)
+    target_compile_options(testFont PRIVATE -Wall -Wextra -Werror -pedantic)
+endif()
+if (MSVC)
+    target_compile_options(testFont PRIVATE /W4 /WX)
 endif()
