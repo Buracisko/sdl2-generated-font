@@ -14,9 +14,9 @@ find_package(SDL2 REQUIRED)
 # Add inlude directory to help IDE
 include_directories(${SDL2_INCLUDE_DIR} PRIVATE include)
 
-add_executable(hello main.c)
+add_executable(testFont main.c)
 
-target_link_libraries(hello PRIVATE ${SDL2_LIBRARY})
+target_link_libraries(testFont PRIVATE ${SDL2_LIBRARY})
 
 #Not sure how clean it is, but I want this flags
 if(MSVC)
