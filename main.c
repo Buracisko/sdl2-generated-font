@@ -12,6 +12,9 @@ const int g_wWidth = 640;
 const int g_wHeight = 360;
 SDL_Window *g_window;
 
+// Renderer
+SDL_Renderer *g_renderer;
+
 // Execution handling
 bool isRunning = true;
 
@@ -40,7 +43,19 @@ int main(int argc, char* argv[])
 	);
 	if (!g_window)
 	{
-		fprintf(stderr, "Unable to create window SDL: %s\n", SDL_GetError());
+		fprintf(stderr, "Unable to create window: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	g_renderer = SDL_CreateRenderer(
+		g_window,
+		-1,
+		SDL_RENDERER_ACCELERATED
+	);
+	if (!g_renderer)
+	{
+		fprintf(stderr, "Unable to create renderer: %s\n", SDL_GetError());
+		return 1;
 	}
 	
 	// Main execution loop
@@ -52,9 +67,13 @@ int main(int argc, char* argv[])
 			if (event.type == SDL_QUIT)
 				isRunning = false;
 		}
+
+		SDL_RenderClear(g_renderer);
+		SDL_RenderPresent(g_renderer);
 	}
 
 	// Cleanup and exit
+	SDL_DestroyRenderer(g_renderer);
 	SDL_DestroyWindow(g_window);
 	SDL_Quit();
 
