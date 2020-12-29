@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 		SDL_SetRenderDrawColor(g_renderer, 0xAB, 0xCD, 0xEF, 0xFF);
 		SDL_RenderClear(g_renderer);
 
-		SDL_Rect dest = {32, 32, 64, 64};
+		SDL_Rect dest = {2, 2, GLYPH_WIDTH, GLYPH_HEIGHT};
 		SDL_RenderCopy(g_renderer, customTexture, NULL, &dest);
 		
 

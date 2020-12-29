@@ -1,6 +1,17 @@
 #include "spriteFont.h"
 #include "SDL.h"
 
+int glyph[GLYPH_HEIGHT][GLYPH_WIDTH] = {
+    {1, 1, 0, 0, 1, 1, 0},
+    {1, 1, 0, 1, 1, 0, 0},
+    {1, 1, 1, 1, 0, 0, 0},
+    {1, 1, 1, 0, 0, 0, 0},
+    {1, 1, 1, 1, 0, 0, 0},
+    {1, 1, 0, 1, 1, 0, 0},
+    {1, 1, 0, 0, 1, 1, 0},
+    {1, 1, 0, 0, 0, 1, 1}
+};
+
 SDL_Texture* createCustomTexture(SDL_Renderer* renderer)
 {
 	// Create custom surface
@@ -21,7 +32,7 @@ SDL_Texture* createCustomTexture(SDL_Renderer* renderer)
 #endif
 
 	SDL_Surface *testSurface =
-		SDL_CreateRGBSurface(0, 64, 64, 32, rmask, gmask, bmask, amask);
+		SDL_CreateRGBSurface(0, GLYPH_WIDTH, GLYPH_HEIGHT, 32, rmask, gmask, bmask, amask);
 	if (!testSurface)
 	{
 		fprintf(stderr, "Unable to create RGB surface: %s\n", SDL_GetError());
@@ -30,7 +41,7 @@ SDL_Texture* createCustomTexture(SDL_Renderer* renderer)
 	
 	//Allocate format from window
 	SDL_PixelFormat* mappingFormat = SDL_AllocFormat(testSurface->format->format);
-	Uint32 targetColor = SDL_MapRGBA(mappingFormat, 0xFF, 0, 0, 0xFF);
+	Uint32 targetColor = SDL_MapRGBA(mappingFormat, 0xFF, 0xFF, 0xFF, 0xFF);
 	Uint32* pixels = (Uint32*)testSurface->pixels;
 	int pixelCount = (testSurface->pitch / 4) * testSurface->h;
 
@@ -38,7 +49,12 @@ SDL_Texture* createCustomTexture(SDL_Renderer* renderer)
     SDL_LockSurface(testSurface);
 
     for (int i = 0; i < pixelCount; ++i)
-		pixels[i] = targetColor;
+    {
+        int row = i / testSurface->w;
+        int col = i % testSurface->w;
+        if (glyph[row][col] == 1)
+            pixels[i] = targetColor;
+    }
 
     SDL_UnlockSurface(testSurface);
 	SDL_FreeFormat(mappingFormat);
