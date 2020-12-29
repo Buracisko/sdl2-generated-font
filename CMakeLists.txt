@@ -14,7 +14,7 @@ find_package(SDL2 REQUIRED)
 # Add inlude directory to help IDE
 include_directories(${SDL2_INCLUDE_DIR} PRIVATE include)
 
-add_executable(testFont main.c)
+add_executable(testFont main.c spriteFont.c)
 
 target_link_libraries(testFont PRIVATE ${SDL2_LIBRARY})
 

@@ -1,10 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+#include "spriteFont.h"
 
 // Needded to deal with windows main function linking
 #define SDL_MAIN_HANDLED
 #include "SDL.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 // Window and its properties
 const char* g_wTitle = "Generated font test";
@@ -18,53 +20,6 @@ SDL_Surface* g_screenSurface;
 
 // Execution handling
 bool isRunning = true;
-
-SDL_Texture* createCustomTexture()
-{
-	// Create custom surface
-	Uint32 rmask, gmask, bmask, amask;
-
-    /* SDL interprets each pixel as a 32-bit number, so our masks must depend
-       on the endianness (byte order) of the machine */
-#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-    rmask = 0xff000000;
-    gmask = 0x00ff0000;
-    bmask = 0x0000ff00;
-    amask = 0x000000ff;
-#else
-    rmask = 0x000000ff;
-    gmask = 0x0000ff00;
-    bmask = 0x00ff0000;
-    amask = 0xff000000;
-#endif
-
-	SDL_Surface *testSurface =
-		SDL_CreateRGBSurface(0, 64, 64, 32, rmask, gmask, bmask, amask);
-	if (!testSurface)
-	{
-		fprintf(stderr, "Unable to create RGB surface: %s\n", SDL_GetError());
-		return NULL;
-	}
-	
-	//Allocate format from window
-	SDL_PixelFormat* mappingFormat = SDL_AllocFormat(testSurface->format->format);
-	Uint32 targetColor = SDL_MapRGBA(mappingFormat, 0xFF, 0, 0, 0xFF);
-	Uint32* pixels = (Uint32*)testSurface->pixels;
-	int pixelCount = (testSurface->pitch / 4) * testSurface->h;
-
-	// Edit pixel data
-    SDL_LockSurface(testSurface);
-
-    for (int i = 0; i < pixelCount; ++i)
-		pixels[i] = targetColor;
-
-    SDL_UnlockSurface(testSurface);
-	SDL_FreeFormat(mappingFormat);
-
-	SDL_Texture* resultingTexture = SDL_CreateTextureFromSurface(g_renderer, testSurface);
-	SDL_FreeSurface(testSurface);
-	return resultingTexture;
-}
 
 int main(int argc, char* argv[])
 {
@@ -109,7 +64,7 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	SDL_Texture* customTexture = createCustomTexture();
+	SDL_Texture* customTexture = createCustomTexture(g_renderer);
 	
 	// Main execution loop
 	while (isRunning)
