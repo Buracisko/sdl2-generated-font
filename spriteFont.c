@@ -4,25 +4,25 @@
 // keep font in 2:3 = sizes of 24:16, 12:8, 6:4
 
 const char* aGlyph = "\
-OXXXXOO0\
-XOOOOXO0\
-XOOOOXO0\
-XOOOOXO0\
-XXXXXXO0\
-XOOOOXO0\
-XOOOOXO0\
-XOOOOXO0\
+ XXXX   \
+X    X  \
+X    X  \
+X    X  \
+XXXXXX  \
+X    X  \
+X    X  \
+X    X  \
 ";
 
 const char* mGlyph = "\
-XOOOOOX0\
-XXOOOXX0\
-XOXOXOX0\
-XOOXOOX0\
-XOOOOOX0\
-XOOOOOX0\
-XOOOOOX0\
-XOOOOOX0\
+X     X \
+XX   XX \
+X X X X \
+X  X  X \
+X     X \
+X     X \
+X     X \
+X     X \
 ";
 
 SDL_Texture* createCustomTexture(SDL_Renderer* renderer)
