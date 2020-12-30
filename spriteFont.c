@@ -1,16 +1,29 @@
 #include "spriteFont.h"
 #include "SDL.h"
 
-int glyph[GLYPH_HEIGHT][GLYPH_WIDTH] = {
-    {1, 1, 0, 0, 1, 1, 0},
-    {1, 1, 0, 1, 1, 0, 0},
-    {1, 1, 1, 1, 0, 0, 0},
-    {1, 1, 1, 0, 0, 0, 0},
-    {1, 1, 1, 1, 0, 0, 0},
-    {1, 1, 0, 1, 1, 0, 0},
-    {1, 1, 0, 0, 1, 1, 0},
-    {1, 1, 0, 0, 0, 1, 1}
-};
+// keep font in 2:3 = sizes of 24:16, 12:8, 6:4
+
+const char* aGlyph = "\
+OXXXXOO0\
+XOOOOXO0\
+XOOOOXO0\
+XOOOOXO0\
+XXXXXXO0\
+XOOOOXO0\
+XOOOOXO0\
+XOOOOXO0\
+";
+
+const char* mGlyph = "\
+XOOOOOX0\
+XXOOOXX0\
+XOXOXOX0\
+XOOXOOX0\
+XOOOOOX0\
+XOOOOOX0\
+XOOOOOX0\
+XOOOOOX0\
+";
 
 SDL_Texture* createCustomTexture(SDL_Renderer* renderer)
 {
@@ -50,10 +63,9 @@ SDL_Texture* createCustomTexture(SDL_Renderer* renderer)
 
     for (int i = 0; i < pixelCount; ++i)
     {
-        int row = i / testSurface->w;
-        int col = i % testSurface->w;
-        if (glyph[row][col] == 1)
+        if (mGlyph[i] == 'X')
             pixels[i] = targetColor;
+        //if (glyph[row][col] == 1)
     }
 
     SDL_UnlockSurface(testSurface);

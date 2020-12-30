@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
 	}
 
 	SDL_Texture* customTexture = createCustomTexture(g_renderer);
-	
+
 	// Main execution loop
 	while (isRunning)
 	{
@@ -76,13 +76,30 @@ int main(int argc, char* argv[])
 				isRunning = false;
 		}
 
-		SDL_SetRenderDrawColor(g_renderer, 0xAB, 0xCD, 0xEF, 0xFF);
+		SDL_SetRenderDrawColor(g_renderer, 0x00, 0x00, 0x00, 0xFF);
 		SDL_RenderClear(g_renderer);
-
-		SDL_Rect dest = {2, 2, GLYPH_WIDTH, GLYPH_HEIGHT};
-		SDL_RenderCopy(g_renderer, customTexture, NULL, &dest);
 		
+		int yOffset = 4;
+		int xOffset = 4;
+		for (int i = 64; i > 0; i -= 8)
+		{
+			SDL_Rect dest = {xOffset, yOffset, i, i};
+			SDL_RenderCopy(g_renderer, customTexture, NULL, &dest);
+			yOffset += dest.h + 4;
+		}
+		/*
+		SDL_Rect dest = {4, 4, GLYPH_WIDTH * 4, GLYPH_HEIGHT * 4};
+		SDL_RenderCopy(g_renderer, customTexture, NULL, &dest);
 
+		SDL_Rect dest2 = {4, 4 + dest.y + dest.h, GLYPH_WIDTH * 2, GLYPH_HEIGHT * 2};
+		SDL_RenderCopy(g_renderer, customTexture, NULL, &dest2);
+
+		SDL_Rect dest3 = {4, 4 + dest2.y + dest2.h, GLYPH_WIDTH, GLYPH_HEIGHT};
+		SDL_RenderCopy(g_renderer, customTexture, NULL, &dest3);
+
+		SDL_Rect dest4 = {4, 4 + dest3.y + dest3.h, 14, 14};
+		SDL_RenderCopy(g_renderer, customTexture, NULL, &dest4);
+		*/
 		SDL_RenderPresent(g_renderer);
 	}
 
