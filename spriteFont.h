@@ -11,7 +11,7 @@ typedef struct SDL_Renderer SDL_Renderer;
 
 extern const char* aGlyph;
 
-typedef struct SpriteFont
+typedef struct SSpriteFont
 {
     SDL_Texture* sheet;
     int height;

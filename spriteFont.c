@@ -2,6 +2,8 @@
 #include "SDL.h"
 
 // keep font in 2:3 = sizes of 24:16, 12:8, 6:4
+// All ASCII characters 32 - 126
+// !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
 
 const char* aGlyph = "\
  XXXX   \
